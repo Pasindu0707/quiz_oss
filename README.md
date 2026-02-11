@@ -52,3 +52,31 @@ npm start
 3. If correct, party pops will appear and you can proceed to next question
 4. If wrong, answers will be shuffled and you can retry
 5. Use navigation buttons or question numbers to move between questions
+
+## GitHub Pages Deployment
+
+This project is configured for automatic deployment to GitHub Pages.
+
+### Setup Instructions:
+
+1. **Enable GitHub Pages in your repository:**
+   - Go to Settings → Pages
+   - Under "Source", select "GitHub Actions"
+
+2. **The deployment will happen automatically:**
+   - Every push to the `main` branch triggers the GitHub Actions workflow
+   - The workflow builds the Angular app and deploys it to GitHub Pages
+   - Your app will be available at: `https://pasindu0707.github.io/quiz_oss/`
+
+### Manual Deployment (Alternative):
+
+If you prefer to deploy manually:
+
+```bash
+npm run build -- --configuration production
+npx angular-cli-ghpages --dir=dist/suddi-quiz
+```
+
+## Build
+
+Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
