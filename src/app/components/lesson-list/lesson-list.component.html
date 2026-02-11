@@ -1,0 +1,19 @@
+<div class="lesson-list-container">
+  <h1>OSSA Exam - Select a Lesson</h1>
+  <div class="lessons-grid">
+    <div 
+      *ngFor="let lesson of lessons" 
+      class="lesson-card"
+      (click)="selectLesson(lesson.id)">
+      <h2>{{ lesson.title }}</h2>
+      <div class="question-indicators">
+        <span 
+          *ngFor="let question of lesson.questions; let i = index"
+          class="question-indicator"
+          [class.correct]="isQuestionCorrect(question.id)">
+          {{ i + 1 }}
+        </span>
+      </div>
+    </div>
+  </div>
+</div>

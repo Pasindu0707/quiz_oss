@@ -1,0 +1,62 @@
+<div class="quiz-container">
+  <div class="quiz-header">
+    <button class="back-button" (click)="goBackToLessons()">← Back to Lessons</button>
+    <h2>Lesson {{ lessonId }} - Question {{ currentQuestionIndex + 1 }} of {{ totalQuestions }}</h2>
+  </div>
+
+  <div class="question-navigation">
+    <button 
+      *ngFor="let num of [].constructor(totalQuestions); let i = index"
+      class="question-nav-btn"
+      [class.active]="i === currentQuestionIndex"
+      [class.correct]="isQuestionNumberCorrect(i + 1)"
+      (click)="goToQuestion(i + 1)">
+      {{ i + 1 }}
+    </button>
+  </div>
+
+  <div class="question-card" *ngIf="getDisplayQuestion()">
+    <div class="party-pops" *ngIf="showPartyPops">
+      <div class="confetti" *ngFor="let i of [].constructor(50)">🎉</div>
+    </div>
+
+    <h3 class="question-text">{{ getDisplayQuestion()!.text }}</h3>
+
+    <div class="answers-container">
+      <button
+        *ngFor="let answer of getDisplayQuestion()!.answers"
+        class="answer-button"
+        [class.selected]="isAnswerSelected(answer.id)"
+        [class.correct]="showPartyPops && isAnswerCorrect(answer.id)"
+        [class.wrong]="showRetry && selectedAnswerId === answer.id"
+        [disabled]="isAnswered && !showRetry"
+        (click)="selectAnswer(answer.id)">
+        {{ answer.text }}
+      </button>
+    </div>
+
+    <div class="quiz-actions">
+      <button 
+        class="nav-button prev-button"
+        [disabled]="!canGoPrevious()"
+        (click)="previousQuestion()">
+        ← Previous
+      </button>
+
+      <button 
+        *ngIf="showRetry"
+        class="retry-button"
+        (click)="retryQuestion()">
+        🔄 Retry
+      </button>
+
+      <button 
+        *ngIf="showPartyPops"
+        class="nav-button next-button"
+        [disabled]="!canGoNext()"
+        (click)="nextQuestion()">
+        Next →
+      </button>
+    </div>
+  </div>
+</div>
